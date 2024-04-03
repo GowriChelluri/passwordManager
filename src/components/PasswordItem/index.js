@@ -1,55 +1,42 @@
 import './index.css'
 
-const PasswordItem = () => (
-  <div className="pm-bg-container">
-    <div className="passwords-container">
-      <h1 className="heading">Add New Password</h1>
-      <form>
-        <div className="input-container">
-          <div className="icon-container">
-            <img
-              className="input-icon"
-              src="https://assets.ccbp.in/frontend/react-js/password-manager-website-img.png"
-              alt="website"
-            />
-          </div>
+const PasswordItem = props => {
+  const {passwordDetails, onDeletePasswordItem, showPassword} = props
+  const {website, username, password, id} = passwordDetails
+  const onClickDelete = () => {
+    onDeletePasswordItem(id)
+  }
 
-          <input className="input" type="text" placeholder="Enter Website" />
+  const passwordText = showPassword ? (
+    <p className="password">{password}</p>
+  ) : (
+    <img
+      src="https://assets.ccbp.in/frontend/react-js/password-manager-stars-img.png"
+      alt="stars"
+      className="stars"
+    />
+  )
+  return (
+    <li>
+      <div className="password-container">
+        <button type="button" className="profile-logo">
+          {website[0].toUpperCase()}
+        </button>
+        <div className="name-password-container">
+          <p className="website-name">{website}</p>
+          <p className="username">{username}</p>
+          {passwordText}
         </div>
-        <div className="input-container">
-          <div className="icon-container">
-            <img
-              className="input-icon"
-              src="https://assets.ccbp.in/frontend/react-js/password-manager-username-img.png"
-              alt="username"
-            />
-          </div>
-
-          <input className="input" type="text" placeholder="Enter Username" />
-        </div>
-        <div className="input-container">
-          <div className="icon-container">
-            <img
-              className="input-icon"
-              src="https://assets.ccbp.in/frontend/react-js/password-manager-password-img.png"
-              alt="password"
-            />
-          </div>
-
-          <input className="input" type="text" placeholder="Enter Password" />
-        </div>
-      </form>
-      <div className="btn-container">
-        <button type="submit" className="btn">
-          Add
+        <button type="button" className="delete-btn" onClick={onClickDelete}>
+          <img
+            src="https://assets.ccbp.in/frontend/react-js/password-manager-delete-img.png"
+            alt="delete"
+            className="delete-img"
+            data-testid="delete"
+          />
         </button>
       </div>
-    </div>
-    <img
-      src="https://assets.ccbp.in/frontend/react-js/password-manager-lg-img.png"
-      alt="password manager"
-      className="password-manager-img"
-    />
-  </div>
-)
+    </li>
+  )
+}
 export default PasswordItem
